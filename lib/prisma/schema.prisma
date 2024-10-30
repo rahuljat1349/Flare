@@ -8,64 +8,64 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())  // Unique ID for each user
-  password  String?    @unique                       // Username must be unique
-  email     String    @unique                       // Email must be unique
-//   password  String                                  // Password stored securely
-//   bio       String?                                 // Optional bio
-//   posts     Post[]                                  // One-to-many relation with posts
-//   comments  Comment[]                               // One-to-many relation with comments
-//   followers Follower[] @relation("followed")        // Many-to-many self-relation (followers)
-//   following Follower[] @relation("follower")        // Many-to-many self-relation (following)
-//   likes     Like[]                                  // One-to-many relation with likes
-//   retweets  Retweet[]                               // One-to-many relation with retweets
-//   createdAt DateTime  @default(now())               // Timestamp when the user was created
+  id        Int       @id @default(autoincrement())           
+  username  String    @unique                                  
+  email     String    @unique                                  
+  password  String?                                           
+  bio       String?                                        
+  posts     Post[]                                             
+  comments  Comment[]                                      
+  followers Follower[] @relation("followed")                 
+  following Follower[] @relation("follower")                    
+  likes     Like[]                                             
+  retweets  Retweet[]                                          
+  createdAt DateTime  @default(now())                           
 }
 
-// model Post {
-//   id        Int       @id @default(autoincrement())  // Unique ID for each post
-//   content   String                                   // Content of the post (tweet)
-//   createdAt DateTime  @default(now())                // Timestamp when the post was created
-//   user      User      @relation(fields: [userId], references: [id]) // Relation to User
-//   userId    Int                                     // Foreign key for the user
-//   comments  Comment[]                               // One-to-many relation with comments
-//   likes     Like[]                                  // One-to-many relation with likes
-//   retweets  Retweet[]                               // One-to-many relation with retweets
-// }
+model Post {
+  id        Int       @id @default(autoincrement())            
+  content   String                                            
+  createdAt DateTime  @default(now())                           
+  user      User      @relation(fields: [userId], references: [id])            
+  userId    Int                                         
+  comments  Comment[]                                        
+  likes     Like[]                                          
+  retweets  Retweet[]                               
+}
 
-// model Comment {
-//   id        Int       @id @default(autoincrement())  // Unique ID for each comment
-//   content   String                                   // Content of the comment
-//   createdAt DateTime  @default(now())                // Timestamp when the comment was created
-//   post      Post      @relation(fields: [postId], references: [id]) // Relation to Post
-//   postId    Int                                     // Foreign key for the post
-//   user      User      @relation(fields: [userId], references: [id]) // Relation to User
-//   userId    Int                                     // Foreign key for the user
-// }
+model Comment {
+  id        Int       @id @default(autoincrement())           
+  content   String                                              
+  createdAt DateTime  @default(now())                           
+  post      Post      @relation(fields: [postId], references: [id])            
+  postId    Int                                            
+  user      User      @relation(fields: [userId], references: [id])            
+  userId    Int                                             
+}
 
-// model Follower {
-//   id         Int      @id @default(autoincrement())  // Unique ID for each follower entry
-//   follower   User     @relation("follower", fields: [followerId], references: [id]) // Follower relation
-//   followerId Int                                     // Foreign key for the follower user
-//   followed   User     @relation("followed", fields: [followedId], references: [id]) // Followed relation
-//   followedId Int                                     // Foreign key for the followed user
-//   createdAt  DateTime @default(now())                // Timestamp when the follow action was made
-// }
+model Follower {
+  id         Int      @id @default(autoincrement())            
+  follower   User     @relation("follower", fields: [followerId], references: [id])             
+  followerId Int                                                
+  followed   User     @relation("followed", fields: [followedId], references: [id])             
+  followedId Int                                              
+  createdAt  DateTime @default(now())                           
+}
 
-// model Like {
-//   id        Int       @id @default(autoincrement())  // Unique ID for each like
-//   post      Post      @relation(fields: [postId], references: [id]) // Relation to Post
-//   postId    Int                                     // Foreign key for the post
-//   user      User      @relation(fields: [userId], references: [id]) // Relation to User
-//   userId    Int                                     // Foreign key for the user
-//   createdAt DateTime  @default(now())               // Timestamp when the like was made
-// }
+model Like {
+  id        Int       @id @default(autoincrement())            
+  post      Post      @relation(fields: [postId], references: [id])            
+  postId    Int                                               
+  user      User      @relation(fields: [userId], references: [id])            
+  userId    Int                                                
+  createdAt DateTime  @default(now())                          
+}
 
-// model Retweet {
-//   id        Int       @id @default(autoincrement())  // Unique ID for each retweet
-//   post      Post      @relation(fields: [postId], references: [id]) // Relation to Post
-//   postId    Int                                     // Foreign key for the post
-//   user      User      @relation(fields: [userId], references: [id]) // Relation to User
-//   userId    Int                                     // Foreign key for the user who retweeted
-//   createdAt DateTime  @default(now())               // Timestamp when the retweet was made
-// }
+model Retweet {
+  id        Int       @id @default(autoincrement())          
+  post      Post      @relation(fields: [postId], references: [id])            
+  postId    Int                                                
+  user      User      @relation(fields: [userId], references: [id])            
+  userId    Int                                                
+  createdAt DateTime  @default(now())                           
+}
